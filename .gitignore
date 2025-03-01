@@ -1,2 +1,21 @@
-obj
-bin
+# Pastas e arquivos do .NET que não precisam ser versionados
+bin/
+obj/
+.vscode/
+*.user
+*.suo
+*.cache
+*.csproj.user
+*.pdb
+*.log
+*.tlog
+
+# Configurações do Visual Studio
+.vs/
+.idea/
+*.sln.docstates
+
+# Dependências do NuGet
+*.nupkg
+packages/
+project.lock.json
