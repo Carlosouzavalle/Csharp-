@@ -214,38 +214,38 @@
 
 
 
-class Program
-{
+// class Program
+// {
 
-    internal class Customer
-    {
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public int Phone { get; set; }
-
-
-        // construtor serve para inicializar a classe com valores padrões ou valores que são passados como parâmetros
-        public Customer(string name, int age, int phone)
-        {
-            Name = name;
-            Age = age;
-            Phone = phone;
-        }
-    }
+//     internal class Customer
+//     {
+//         public string Name { get; set; }
+//         public int Age { get; set; }
+//         public int Phone { get; set; }
 
 
-    static void Main()
-    {
-        Customer customer = new Customer("Carlos", 26, 123123123);
-        Console.WriteLine(customer.Name);
-        Console.Read();
+//         // construtor serve para inicializar a classe com valores padrões ou valores que são passados como parâmetros
+//         public Customer(string name, int age, int phone)
+//         {
+//             Name = name;
+//             Age = age;
+//             Phone = phone;
+//         }
+//     }
+
+
+//     static void Main()
+//     {
+//         Customer customer = new Customer("Carlos", 26, 123123123);
+//         Console.WriteLine(customer.Name);
+//         Console.Read();
 
 
         
-    }
+//     }
 
     
-}
+// }
 
 
 //Customer customer = new Customer();
@@ -256,3 +256,55 @@ class Program
 //Console.WriteLine(customer.Name);
 
 //Console.Read();
+
+
+
+//=========================================================================================================
+
+
+//=====================================  HERANÇA  ====================================================================
+
+class Animal 
+{
+    public string? Name { get; set;}
+    // ? operador de tipo nulavel para indicar que Name pode ser
+    // nulo, ou seja, pode não ter valor.
+    public void Eat() 
+    {
+        
+        Console.WriteLine($"{Name}  is eating");
+    }
+
+    public virtual void EmitirSom() 
+    {
+        Console.WriteLine("Animal is Emitindo Som");
+    }
+}
+
+class Dog : Animal
+{
+    public void Bark() 
+    {
+        
+        Console.WriteLine("Dog is Barking");
+    } 
+
+    public override void EmitirSom() 
+    {
+        Console.WriteLine("au au au");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Dog dog = new Dog();
+        dog.Name = "Rex";
+        dog.Eat();
+        dog.Bark();
+        dog.EmitirSom();
+        Console.Read();
+    }
+
+}
