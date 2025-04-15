@@ -241,10 +241,10 @@
 //         Console.Read();
 
 
-        
+
 //     }
 
-    
+
 // }
 
 
@@ -264,47 +264,143 @@
 
 //=====================================  HERANÇA  ====================================================================
 
-class Animal 
+// class Animal 
+// {
+//     public string? Name { get; set;}
+//     // ? operador de tipo nulavel para indicar que Name pode ser
+//     // nulo, ou seja, pode não ter valor.
+//     public void Eat() 
+//     {
+
+//         Console.WriteLine($"{Name}  is eating");
+//     }
+
+//     public virtual void EmitirSom() 
+//     {
+//         Console.WriteLine("Animal is Emitindo Som");
+//     }
+// }
+
+// class Dog : Animal
+// {
+//     public void Bark() 
+//     {
+
+//         Console.WriteLine("Dog is Barking");
+//     } 
+
+//     public override void EmitirSom() 
+//     {
+//         Console.WriteLine("au au au");
+//     }
+// }
+
+// class Program
+// {
+//     static void Main()
+//     {
+//         Dog dog = new Dog();
+//         dog.Name = "Rex";
+//         dog.Eat();
+//         dog.Bark();
+//         dog.EmitirSom();
+//         Console.Read();
+//     }
+
+// }
+
+
+
+
+// ============================= ENCAPSULAMENTO ==============================================// Arquivo inteiro só com instruções diretas
+// namespace ENCAPSULAMENTO
+// {
+//     class Program
+//     {
+//         class Pessoa {
+
+//             private string nome;    
+//             public string Nome { get{ return nome; } 
+//             set {
+//                 if (!string.IsNullOrWhiteSpace(value))
+//                 {
+//                     nome = value;
+//                 }
+//                 else
+//                 {
+//                     Console.WriteLine("Nome inválido.");
+//                 }
+//             }}
+
+
+
+//         }
+
+
+
+//         static void Main(string[] args) {
+
+//             Pessoa p = new Pessoa();
+//             p.Nome = "Lucas";
+//             Console.WriteLine(p.Nome);
+
+//             Pessoa p2 = new Pessoa();
+//             p2.Nome = "";
+//             Console.WriteLine(p2.nome);
+
+//         }
+//     }
+// }
+
+
+
+
+
+
+// using System;
+
+// namespace MeusCodigos
+// {
+//     class Program
+//     {
+//         static void Main(string[] args)
+//         {
+//             Pessoa p = new Pessoa();
+//             p.Nome = "Lucas";
+//             Console.WriteLine(p.Nome);
+//         }
+//     }
+
+//     class Pessoa
+//     {
+//         public string Nome { get; set; }
+//     }
+// }
+
+
+namespace Alunos
 {
-    public string? Name { get; set;}
-    // ? operador de tipo nulavel para indicar que Name pode ser
-    // nulo, ou seja, pode não ter valor.
-    public void Eat() 
+    class Aluno
     {
-        
-        Console.WriteLine($"{Name}  is eating");
+        // 1 maneira
+        private string? _nome;
+        public string? Nome {
+            get { return _nome; }
+            set { _nome = value; }
+        }
+
+        // 2 maneira 
+        public double Media { get; set; }
     }
 
-    public virtual void EmitirSom() 
-    {
-        Console.WriteLine("Animal is Emitindo Som");
+     class Program  {
+        static void Main(string[] args) 
+        {
+            Aluno obj = new();
+            obj.Nome = "Carlos";
+            obj.Media = 10;
+
+            Console.WriteLine($"{obj.Nome} obteve média {obj.Media}");
+        }
     }
-}
-
-class Dog : Animal
-{
-    public void Bark() 
-    {
-        
-        Console.WriteLine("Dog is Barking");
-    } 
-
-    public override void EmitirSom() 
-    {
-        Console.WriteLine("au au au");
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        Dog dog = new Dog();
-        dog.Name = "Rex";
-        dog.Eat();
-        dog.Bark();
-        dog.EmitirSom();
-        Console.Read();
-    }
-
 }
