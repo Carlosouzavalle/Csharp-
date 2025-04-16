@@ -63,9 +63,20 @@
 
 // is alphanumeric or not
 
-object valor = "Carlos123";
-bool esAlfanumerico = valor is string && System.Text.RegularExpressions.Regex.IsMatch((string)valor, @"^[a-zA-Z0-9]+$");
-Console.WriteLine($"es alfanum: {esAlfanumerico}");
-Console.Read();
+// object valor = "Carlos123";
+// bool esAlfanumerico = valor is string && System.Text.RegularExpressions.Regex.IsMatch((string)valor, @"^[a-zA-Z0-9]+$");
+// Console.WriteLine($"es alfanum: {esAlfanumerico}");
+// Console.Read();
 
 //==========================================================================================================
+
+// se esta em maiuscula
+
+// var valor = "CARLOS";
+// bool esmayusculas = valor is string && System.Text.RegularExpressions.Regex.IsMatch((string) valor, @"^[A-Z]+$");
+// Console.WriteLine($"es mayúsculas: " + esmayusculas);
+
+// es replica para minuscula 
+var valor = "Carlos";
+bool esmayusculas = valor is string && System.Text.RegularExpressions.Regex.IsMatch((string) valor, @"^[a-z]+$");
+Console.WriteLine($"es mayúsculas: " + esmayusculas);
