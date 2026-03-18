@@ -1,0 +1,27 @@
+Aqui você vai encontrar todos os desafios para fazer
+
+1  escreva um programa que apresente ola mundo
+2 faça um programa que leia o nome de uma pessoa e mostre uma mensgem de boas-vindas
+3 faça um algoritmo que mostre a soma entre dois valores
+4 faça um programa que mostre os seguintes resultados de um determinado valor 
+(tipo, se tem espaços, se é um numero, se é alfabético, se é alfanumerico, se esta em maiusculo, se esta em minusculo, e se esta capitalizado ) 
+5 faça um programa que mostre seu sucessor e antecessor
+6 crie um algoritmo que mostre o dobro, o triplo e a raiz
+7 media de um aluno
+8 escreva um programa em metros e mostre ele em outras medidas
+9 faça um programa que leia um valor e apresente sua tabuada
+10 crie um algoritmo que receba o valor em real e converta ele para dólar
+11 faça um programa que receba a altura e a largura mostre o tamanho em m² e quantos litros de tinta precisa para pintar a cada 2m de parede precisa de 1L de tinta
+12 crie um algoritmo que leia o preço de um produto e apresente ele com 5% de desconto
+13 crie um algoritmo que leia o salario de um funcionario e reajuste ele em 15%
+14 conversão de temperatura de celsius para Fahrenheit 
+15 crie um algoritmo que pergunte a quantidade de km percorridos por um carro alugado e a quantidade de dias pelo qual foi alugado. sendo que o preço a pagar é 60R$ por dia e 0,15R$ por km rodado
+16 crie um algoritmo que leia um numero e mostre sua porção inteira
+17 faça um programa que leia o comprimento do cateto oposto e do cateto adjacente
+de um triângulo, calcule e mostre o comprimento da hipotenusa.
+18 faça um programa que leia um angulo e mostre seu seno, cosseno e tangente
+19 sorteando un item da lista
+20 sorteando uma ordem na lista 
+21 tocar uma musica em python
+22 analisando um texto
+23 Separando digitos e numeros
