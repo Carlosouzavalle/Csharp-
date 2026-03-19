@@ -64,8 +64,10 @@
 // na condição E ambos tem que ser verdadeiro do contrario não vai funcionar
 
 
-// bool a = true;
+//===================================================================================
+// condicional
 
+// bool a = true;
 
 // if(!a)
 // {
@@ -77,6 +79,8 @@
 // }
 
 // operador de negação pega algo que é false e transforma em true e vice e versa
+
+//===================================================================================
 
 // FUNÇÕES / METODOS
 // as funções ou metodos é a mesma coisa e em c# são diferentes de linguagens como javascript, python
@@ -92,6 +96,7 @@
 
 // é void pois não retorna nada, apenas apresenta a mensagem que pedimos
 
+//===================================================================================
 
 // ESTRUTURAS DE CONTROLE
 
@@ -105,7 +110,7 @@
 //     Console.WriteLine("Menor de idade");
 // }
 
-
+//===================================================================================
 
 // SWITCH CASE
 
@@ -131,6 +136,7 @@
 
 // ele vai percorer todo switch e se encontrar o valor pedido ele retorna e sai do bloco com o break mais pode continuar també, se usarmos o continue, caso ele não encontre  nada ele cai no default e retorna o que tem lá
 
+//===================================================================================
 
 // LAÇO FOR
 
@@ -141,3 +147,102 @@
 
 // Um laço de repetição basicamente ele vai percorer até completar alguma exigencia
 // por exemplo a que temos acima 
+
+
+//=================================================================
+
+// WHILE LOOP
+
+// int a = 0;
+
+// while (a < 10)
+// {
+//     Console.WriteLine(a);
+//     a++;
+// }
+
+// enquanto a < 0 a++ o quer dizer quue a vai até 9 porque começa em 0
+// temos também o do while
+
+//=======================================================================================
+
+// DO WHILE
+
+// int a = 0;
+// do
+// {
+//     Console.WriteLine(a);
+//     a++;
+// } while (a < 5);
+
+// a diferença aqui é que ele ler o codigo pelo menos uma vez.
+
+//========================================================================================
+
+// ARRAYS AND FOREACH
+
+// string[] frutas = {"maça", "laranja","uva"};
+
+
+// foreach(string fruta in frutas)
+// {
+//     Console.WriteLine(fruta);
+// }
+
+// também funciona para inteiros
+
+// int[] numeros = {1,2,3,4,5};
+
+// foreach(int numero in numeros)
+// {
+//     Console.WriteLine(numero);
+// }
+
+// ORIENTAÇÃO A OBJETOS
+
+
+
+
+using System;
+
+class Pessoa
+{
+    public string Nome;
+    public int Idade;
+
+    public void Apresentar()
+    {
+        Console.WriteLine($"Nome: {Nome} Idade: {Idade}");
+    }
+}
+
+class Teste
+{
+    public void Executar()
+    {
+        Pessoa p2 = new Pessoa();
+        p2.Nome = "Lua";
+        p2.Idade = 25;
+
+        p2.Apresentar();
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Pessoa p = new Pessoa();
+
+        p.Nome = "Carlos";
+        p.Idade = 27;
+
+        p.Apresentar();
+
+        Teste t = new Teste();
+        t.Executar();
+    }
+}
+
+// dentro de classes temos modificadores de acesso public pode ser acessado de qualquer lugar, protected é apenas na propria classe ou nas classes que extedem essa classe (herança).
+// private acesso somente a esta classe.
