@@ -210,39 +210,47 @@ class Pessoa
     public string Nome;
     public int Idade;
 
+    public Pessoa(string nome, int idade)
+    {
+        Nome = nome;
+        Idade = idade;
+    }
+
     public void Apresentar()
     {
         Console.WriteLine($"Nome: {Nome} Idade: {Idade}");
     }
 }
 
-class Teste
-{
-    public void Executar()
-    {
-        Pessoa p2 = new Pessoa();
-        p2.Nome = "Lua";
-        p2.Idade = 25;
+// class Teste
+// {
+//     public void Executar()
+//     {
+//         Pessoa p2 = new Pessoa();
+//         p2.Nome = "Lua";
+//         p2.Idade = 25;
 
-        p2.Apresentar();
-    }
-}
+//         p2.Apresentar();
+//     }
+// }
 
 class Program
 {
     static void Main()
     {
-        Pessoa p = new Pessoa();
-
-        p.Nome = "Carlos";
-        p.Idade = 27;
-
+        Pessoa p = new Pessoa("Carlos", 27); // instancia da classe Pessoa
         p.Apresentar();
 
-        Teste t = new Teste();
-        t.Executar();
+        // p.Nome = "Carlos";
+        // p.Idade = 27;
+
+
+        // Teste t = new Teste();
+        // t.Executar();
     }
 }
+
+
 
 // dentro de classes temos modificadores de acesso public pode ser acessado de qualquer lugar, protected é apenas na propria classe ou nas classes que extedem essa classe (herança).
 // private acesso somente a esta classe.
