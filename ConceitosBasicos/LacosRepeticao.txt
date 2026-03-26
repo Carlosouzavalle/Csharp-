@@ -1,0 +1,40 @@
+// LAÇO FOR
+
+// for(int i = 0; i < 4; i++)
+// {
+//     Console.WriteLine($"O valor é {i}");
+// }
+
+// Um laço de repetição basicamente ele vai percorer até completar alguma exigencia
+// por exemplo a que temos acima 
+
+
+//=================================================================
+
+// WHILE LOOP
+
+// int a = 0;
+
+// while (a < 10)
+// {
+//     Console.WriteLine(a);
+//     a++;
+// }
+
+// enquanto a < 0 a++ o quer dizer quue a vai até 9 porque começa em 0
+// temos também o do while
+
+//=======================================================================================
+
+// DO WHILE
+
+// int a = 0;
+// do
+// {
+//     Console.WriteLine(a);
+//     a++;
+// } while (a < 5);
+
+// a diferença aqui é que ele ler o codigo pelo menos uma vez.
+
+//========================================================================================

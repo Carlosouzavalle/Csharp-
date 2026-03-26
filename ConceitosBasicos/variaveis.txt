@@ -1,0 +1,22 @@
+// Variaveis
+
+// var variavel = 15;
+// var variavel = true;
+
+// string variavel =  "Carlos";
+// int idade = 27;
+// Console.WriteLine($"{variavel} {idade}");
+
+
+// O var ele consegue ser dinamico a ponto de você não precisar especificar o tipo da variavel
+// lembrando que em c# você precisa definir o tipo de dado antes de declarar a variavel a não ser no caso a acima
+
+//======================================================================================
+// Concatenação
+
+// string nome = "Carlos";
+// int idade = 27;
+
+// Console.WriteLine("Meu nome é " + nome + " e tenho " + idade);
+// porem quando temos muita concatenação começa a ficar estranho para evitar isso utilizamos interpolação de string.
+// Console.WriteLine($"Meu nome é {nome} e tenho {idade} anos de idade.");

@@ -1,0 +1,16 @@
+
+// Operadores 
+
+// int a = 10;
+// int b = 9;
+
+// Console.WriteLine(a + b); // soma
+// Console.WriteLine(a - b); // subtração
+// Console.WriteLine(a / b); // divisão
+// Console.WriteLine(a * b); // multiplicação
+// Console.WriteLine(a % b); // resto da divisão
+// Console.WriteLine($"È igual {a == b}"); // true e false apenas dois valores
+// Console.WriteLine($"È maior {a > b}");
+// Console.WriteLine($"È menor {b < a}");
+// Console.WriteLine($"È menor ou igual {a <= b}");
+// Console.WriteLine($"È maior ou igual {a >= b}");

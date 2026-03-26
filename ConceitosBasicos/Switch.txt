@@ -1,0 +1,25 @@
+
+
+// SWITCH CASE
+
+
+// string cor = "preto";
+
+// switch (cor)
+// {
+//     case "azul":
+//         Console.WriteLine("a cor é azul");
+//         break;
+//     case "vermelho":
+//         Console.WriteLine("a cor é vermelho");
+//         break;
+//     case "preto":
+//         Console.WriteLine("a cor é preto");
+//         break;
+
+//     default:
+//         Console.WriteLine("Nenhuma cor encontrada");
+//         break;
+// }
+
+// ele vai percorer todo switch e se encontrar o valor pedido ele retorna e sai do bloco com o break mais pode continuar també, se usarmos o continue, caso ele não encontre  nada ele cai no default e retorna o que tem lá

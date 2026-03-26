@@ -1,4 +1,6 @@
-﻿using System;
+// Herança
+
+using System;
 
 class Pessoa
 {

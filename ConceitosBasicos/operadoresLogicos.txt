@@ -1,0 +1,23 @@
+
+// Operadores logicos
+
+// bool a = true;
+// bool b = false;
+
+// if(a || b)
+// {
+//     Console.WriteLine("Operador OR (||)");
+// }
+
+// Operador OR se alguma condição for verdadeiro ele cai no if
+
+
+// bool a = true;
+// bool b = true;
+
+// if(a && b)
+// {
+//     Console.WriteLine("Operador E (&&)");
+// }
+
+// na condição E ambos tem que ser verdadeiro do contrario não vai funcionar

@@ -1,12 +1,17 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 
 class Conta
 {
     public string Nome;
+
+    public Conta(string nome)
+    {
+        Nome = nome;
+    }
+
     public void MostrarDados()
     {
-        Console.WriteLine(Nome);
+        Console.WriteLine($"Nome: {Nome}");
     }
 }
 
@@ -15,8 +20,7 @@ class Program
 {
     static void Main()
     {
-        Conta cliente1 = new Conta();
-        cliente1.Nome = "Carlos";
+        Conta cliente1 = new Conta("Carlos");
         cliente1.MostrarDados();
     }
 }

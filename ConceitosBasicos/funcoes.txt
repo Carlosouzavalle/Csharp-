@@ -1,0 +1,14 @@
+
+// FUNÇÕES / METODOS
+// as funções ou metodos é a mesma coisa e em c# são diferentes de linguagens como javascript, python
+
+
+// void saudacao(string nome)
+// {
+//     Console.WriteLine($"Bem-vindo {nome} ao nosso site!!!");
+// }
+
+// saudacao("Carlos");
+
+
+// é void pois não retorna nada, apenas apresenta a mensagem que pedimos

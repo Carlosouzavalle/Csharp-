@@ -1,0 +1,15 @@
+
+// condicional e estrutura de controle
+
+// bool a = true;
+
+// if(!a)
+// {
+//     Console.WriteLine("Operador de negação (!)");
+// } 
+// else
+// {
+//     Console.WriteLine("False");
+// }
+
+// operador de negação pega algo que é false e transforma em true e vice e versa
