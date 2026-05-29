@@ -1,0 +1,36 @@
+body {
+    background: #111;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #555;
+}
+
+.manga-item {
+    margin-top: 10px;
+}
+
+img {
+    width: 80%;
+    margin: 10px 0;
+    border-radius: 8px;
+}
