@@ -2,14 +2,31 @@ using GameStore.API.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Frontend",
+        policy =>
+        {
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+app.UseCors("Frontend");
+
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
 
 var games = new List<Game>
 {
@@ -120,6 +137,7 @@ app.MapPatch("/games/{id}", (int id, Game updateGame) =>
 
     return Results.Ok(game);
 });
+
 
 
 
