@@ -1,4 +1,6 @@
 using GameStore.API.Models;
+using GameStore.API.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,20 @@ builder.Services.AddCors(options =>
 });
 
 
+
 builder.Services.AddOpenApi();
+
+
+
+builder.Services.AddDbContext<GameStoreContext>(options =>
+{
+    options.UseSqlite("Data Source=gamestore.db");
+});
+
+
+// var games = new List<Game>
+// aqui era a lista de jogos, mas agora vamos usar o banco de dados, então não precisamos mais disso
+// GameStoreContext db;
 
 var app = builder.Build();
 
@@ -28,46 +43,28 @@ if (app.Environment.IsDevelopment())
 }
 
 
-var games = new List<Game>
-{
-    new Game
-    {
-        Id = 1,
-        Title = "Hollow Knight",
-        Genre = "Metroidvania",
-        Price = 46.90m
-    },
-
-    new Game
-    {
-        Id = 2,
-        Title = "Celeste",
-        Genre = "Platformer",
-        Price = 39.90m
-    }
-};
-
 
 // GET
-app.MapGet("/games", () =>
+app.MapGet("/games", (GameStoreContext db) =>
 {
-    return games;
+    return db.Games.ToList();
 });
 
 
 // POST 
-// vai enviar mais não salva, para salvar tem que adicionar a lista
-app.MapPost("/games", (Game game) =>
+app.MapPost("/games", (GameStoreContext db, Game game) =>
 {
-    games.Add(game);
+    db.Games.Add(game);
+    db.SaveChanges();
 
     return Results.Created($"/games/{game.Id}", game);
 });
 
 
-app.MapGet("/games/{id}", (int id) =>
+// GET by id
+app.MapGet("/games/{id}", (GameStoreContext db, int id) =>
 {
-   var game = games.FirstOrDefault(g => g.Id == id); 
+   var game = db.Games.FirstOrDefault(g => g.Id == id); 
     if (game is null)
     {
         return Results.NotFound("Sorry, game not found.");
@@ -78,42 +75,48 @@ app.MapGet("/games/{id}", (int id) =>
 
 
 //PUT
-app.MapPut("/games/{id}", (int id, Game updateGame) =>
+// O PUT é usado para atualizar um recurso inteiro, ou seja, você precisa enviar todos os campos do jogo, mesmo que não queira atualizá-los. Se um campo não for enviado, ele será definido como o valor padrão (por exemplo, string vazia para strings e 0 para números).
+app.MapPut("/games/{id}", (GameStoreContext db, int id, Game updateGame) =>
 {
-    var game = games.FirstOrDefault(g => g.Id == id);
+    var game = db.Games.FirstOrDefault(g => g.Id == id);
     
     if (game is null)
     {
         return Results.NotFound("Sorry, but i cant find this game.");
     }
 
-    game.Id = updateGame.Id;
     game.Title = updateGame.Title;
     game.Genre = updateGame.Genre;
     game.Price = updateGame.Price;
+    db.SaveChanges();
 
     return Results.Ok(game);
 });
 
 
 // DELETE 
-app.MapDelete("/games/{id}", (int id) =>
+// Aqui vai remover o jogo do banco de dados, então não precisamos mais da lista de jogos, porque agora estamos usando o banco de dados para armazenar os jogos.
+app.MapDelete("/games/{id}", (GameStoreContext db, int id) =>
 {
-    var game = games.FirstOrDefault(g => g.Id == id);
+    var game = db.Games.FirstOrDefault(g => g.Id == id);
 
     if (game is null)
     {
         return Results.NotFound("Sorry, but i cant find this game.");
     }
-    games.Remove(game);
+
+    // db.Games.Remove(game); // Aqui era para remover o jogo da lista, mas agora vamos remover do banco de dados, então usamos o db.Games.Remove(game) para remover o jogo do banco de dados.
+    db.Games.Remove(game);
+    db.SaveChanges();
     return Results.NoContent();
 });
 
 
 // PATCH
-app.MapPatch("/games/{id}", (int id, Game updateGame) =>
+// O PATCH é usado para atualizar um recurso parcialmente, ou seja, você pode enviar apenas os campos que deseja atualizar. Se um campo não for enviado, ele manterá o valor atual no banco de dados.
+app.MapPatch("/games/{id}", (GameStoreContext db, int id, Game updateGame) =>
 {
-    var game = games.FirstOrDefault(g => g.Id == id);
+    var game = db.Games.FirstOrDefault(g => g.Id == id);
 
     if(game is null)
     {
@@ -135,6 +138,9 @@ app.MapPatch("/games/{id}", (int id, Game updateGame) =>
         game.Price = updateGame.Price;
     }
 
+
+    db.SaveChanges();
+    
     return Results.Ok(game);
 });
 
