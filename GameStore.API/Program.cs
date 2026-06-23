@@ -45,10 +45,10 @@ if (app.Environment.IsDevelopment())
 
 
 // GET
-app.MapGet("/games", (GameStoreContext db) =>
-{
-    return db.Games.ToList();
-});
+// app.MapGet("/games", (GameStoreContext db) =>
+// {
+//     return db.Games.ToList();
+// });
 
 
 // POST 
@@ -62,88 +62,28 @@ app.MapPost("/games", (GameStoreContext db, Game game) =>
 
 
 // GET by id
-app.MapGet("/games/{id}", (GameStoreContext db, int id) =>
+app.MapGet("/games/search", (GameStoreContext db, string query) =>
 {
-   var game = db.Games.FirstOrDefault(g => g.Id == id); 
-    if (game is null)
-    {
-        return Results.NotFound("Sorry, game not found.");
-    }
-    return Results.Ok(game);
+    Console.WriteLine($"Buscando: {query}");
+
+    var games = db.Games
+        .Where(g => g.Title.Contains(query))
+        .ToList();
+
+    return Results.Ok(games);
 });
 
-
-
-//PUT
-// O PUT é usado para atualizar um recurso inteiro, ou seja, você precisa enviar todos os campos do jogo, mesmo que não queira atualizá-los. Se um campo não for enviado, ele será definido como o valor padrão (por exemplo, string vazia para strings e 0 para números).
-app.MapPut("/games/{id}", (GameStoreContext db, int id, Game updateGame) =>
-{
-    var game = db.Games.FirstOrDefault(g => g.Id == id);
-    
-    if (game is null)
-    {
-        return Results.NotFound("Sorry, but i cant find this game.");
-    }
-
-    game.Title = updateGame.Title;
-    game.Genre = updateGame.Genre;
-    game.Price = updateGame.Price;
-    db.SaveChanges();
-
-    return Results.Ok(game);
-});
-
-
-// DELETE 
-// Aqui vai remover o jogo do banco de dados, então não precisamos mais da lista de jogos, porque agora estamos usando o banco de dados para armazenar os jogos.
-app.MapDelete("/games/{id}", (GameStoreContext db, int id) =>
+app.MapGet("/games/{id:int}", (GameStoreContext db, int id) =>
 {
     var game = db.Games.FirstOrDefault(g => g.Id == id);
 
     if (game is null)
     {
-        return Results.NotFound("Sorry, but i cant find this game.");
+        return Results.NotFound();
     }
 
-    // db.Games.Remove(game); // Aqui era para remover o jogo da lista, mas agora vamos remover do banco de dados, então usamos o db.Games.Remove(game) para remover o jogo do banco de dados.
-    db.Games.Remove(game);
-    db.SaveChanges();
-    return Results.NoContent();
-});
-
-
-// PATCH
-// O PATCH é usado para atualizar um recurso parcialmente, ou seja, você pode enviar apenas os campos que deseja atualizar. Se um campo não for enviado, ele manterá o valor atual no banco de dados.
-app.MapPatch("/games/{id}", (GameStoreContext db, int id, Game updateGame) =>
-{
-    var game = db.Games.FirstOrDefault(g => g.Id == id);
-
-    if(game is null)
-    {
-        return Results.NotFound("Sorry, but i cant find this game.");
-    }
-
-    if (!string.IsNullOrEmpty(updateGame.Title))
-    {
-        game.Title = updateGame.Title;
-    }
-
-    if (!string.IsNullOrEmpty(updateGame.Genre))
-    {
-        game.Genre = updateGame.Genre;
-    }
-
-    if (updateGame.Price != 0)
-    {
-        game.Price = updateGame.Price;
-    }
-
-
-    db.SaveChanges();
-    
     return Results.Ok(game);
 });
-
 
 
 
