@@ -17,13 +17,13 @@ Aqui você vai encontrar todos os desafios para fazer
 14 conversão de temperatura de celsius para Fahrenheit 
 15 crie um algoritmo que pergunte a quantidade de km percorridos por um carro alugado e a quantidade de dias pelo qual foi alugado. sendo que o preço a pagar é 60R$ por dia e 0,15R$ por km rodado
 16 crie um algoritmo que leia um numero e mostre sua porção inteira
-
 17 faça um programa que leia o comprimento do cateto oposto e do cateto adjacente
 de um triângulo, calcule e mostre o comprimento da hipotenusa.
-
-
 18 faça um programa que leia um angulo e mostre seu seno, cosseno e tangente
+
 19 sorteando un item da lista
+
+
 20 sorteando uma ordem na lista 
 21 tocar uma musica em python
 22 analisando um texto
