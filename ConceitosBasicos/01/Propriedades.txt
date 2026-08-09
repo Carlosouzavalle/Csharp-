@@ -1,0 +1,261 @@
+1. O que é uma propriedade?
+
+# Uma propriedade permite que uma classe exponha e controle dados que 
+# pertencem ao objeto.
+# Exemplo:
+
+class Pessoa
+{
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+}
+
+# Aqui:
+
+Nome
+Idade
+
+# são propriedades.
+
+# Podemos fazer:
+
+Pessoa pessoa = new Pessoa();
+pessoa.Nome = "Carlos";
+pessoa.Idade = 28;
+
+# E depois:
+
+Console.WriteLine(pessoa.Nome);
+Console.WriteLine(pessoa.Idade);
+
+2. O que significa { get; set; }?
+Essa é a parte mais importante.
+Quando temos:
+
+public string Nome { get; set; }
+
+temos:
+
+Nome
+ │
+ ├── get → pegar/ler o valor
+ │
+ └── set → colocar/alterar o valor
+
+# Então:
+
+pessoa.Nome = "Carlos";
+
+# usa o:
+
+set
+
+# Enquanto:
+
+Console.WriteLine(pessoa.Nome);
+
+usa:
+
+get
+
+3. get e set podem ser separados
+
+# Você não é obrigado a usar os dois.
+
+# Somente leitura
+public string Nome { get; }
+
+# Você consegue:
+
+Console.WriteLine(pessoa.Nome);
+
+# Mas não:
+
+pessoa.Nome = "Carlos";
+
+# porque não existe set.
+
+
+
+# Somente escrita
+
+# Existe a possibilidade de:
+
+public string Senha { set; }
+
+# Mas isso é bem menos comum.
+
+
+
+4. Podemos controlar quem pode alterar
+
+# Essa parte é muito importante:
+
+public string Nome { get; private set; }
+
+# Significa:
+
+# Qualquer código pode ler Nome, mas somente a própria classe pode alterá-lo.
+
+
+# Por exemplo:
+
+class Pessoa
+{
+    public string Nome { get; private set; }
+
+    public Pessoa(string nome)
+    {
+        Nome = nome;
+    }
+}
+
+# Podemos fazer:
+
+Pessoa pessoa = new Pessoa("Carlos");
+Console.WriteLine(pessoa.Nome);
+
+# Mas isso:
+pessoa.Nome = "João";
+
+# vai dar erro.
+
+# Porque o set é:
+private set;
+
+
+5. Por que isso é melhor que um campo público?
+
+# Você já fez anteriormente:
+
+public string Nome;
+
+# Isso é um campo público.
+
+
+# Qualquer código pode fazer:
+
+pessoa.Nome = "Carlos";
+
+# e alterar diretamente.
+# Com uma propriedade podemos controlar o acesso:
+
+public string Nome { get; private set; }
+# E isso é uma parte do conceito de encapsulamento, que estudaremos depois.
+
+6. Propriedade pode ter lógica
+
+# Aqui começa a ficar interessante.
+
+# Podemos fazer:
+
+class Pessoa
+{
+    private int idade;
+
+    public int Idade
+    {
+        get
+        {
+            return idade;
+        }
+
+        set
+        {
+            if (value >= 0)
+            {
+                idade = value;
+            }
+        }
+    }
+}
+
+
+# Agora:
+
+Pessoa pessoa = new Pessoa();
+pessoa.Idade = 28;
+
+# funciona.
+# Mas:
+
+pessoa.Idade = -10;
+
+# não altera a idade.
+# O que é value?
+# Dentro do set:
+
+set
+{
+    idade = value;
+}
+
+# value representa o valor que você está tentando colocar na propriedade.
+# Então:
+
+pessoa.Idade = 28;
+
+# é como se:
+
+value = 28
+
+7. Existem duas formas de propriedade
+Auto-property
+
+# É essa que você mais vai usar:
+
+public string Nome { get; set; }
+
+# O C# cria automaticamente o armazenamento interno.
+# Propriedade completa
+# Quando precisamos colocar alguma lógica:
+
+private int idade;
+
+public int Idade
+{
+    get
+    {
+        return idade;
+    }
+
+    set
+    {
+        if (value >= 0)
+        {
+            idade = value;
+        }
+    }
+}
+
+# Aqui temos:
+
+private int idade;
+       ↑
+# campo que armazena o valor
+
+public int Idade
+       ↑
+# propriedade que controla o acesso
+
+
+8. E aquele = string.Empty?
+# Você já tinha usado:
+
+public string Nome { get; set; } = string.Empty;
+
+# Isso significa que a propriedade começa com:
+
+""
+
+# uma string vazia.
+# É diferente de deixar uma string sem valor (null).
+
+# Por exemplo:
+
+public string Nome { get; set; } = string.Empty;
+
+# inicialmente:
+
+Nome = ""
+

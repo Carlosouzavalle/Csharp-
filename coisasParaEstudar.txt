@@ -1,0 +1,82 @@
+Blazor;
+ASP.NET MVC;
+RabbitMQ;
+SQL Server;
+Entity Framework;
+
+
+
+🔵 Bloco 1 — Orientação a Objetos
+Classes
+Objetos
+Propriedades
+Métodos dentro de classes
+Construtores
+this
+Encapsulamento
+private, public
+get / set
+Herança
+Polimorfismo
+Classes abstratas
+Interfaces
+
+🟢 Bloco 2 — C# intermediário
+Arrays
+List<T>
+Dictionary<TKey,TValue>
+foreach
+Generics
+enum
+try/catch
+Exceções
+DateTime
+nullable
+var
+object
+
+🟡 Bloco 3 — LINQ
+Where
+Select
+OrderBy
+OrderByDescending
+First
+FirstOrDefault
+Single
+Any
+Count
+Sum
+Average
+GroupBy
+
+🟠 Bloco 4 — Assíncrono
+Task
+async
+await
+Task<T>
+tratamento de erros assíncronos
+
+🔴 Bloco 5 — ASP.NET Core
+HTTP
+GET
+POST
+PUT
+DELETE
+Query parameters
+Route parameters
+Request/Response
+DTOs
+Services
+Dependency Injection
+Middleware
+Validação
+
+🟣 Bloco 6 — EF Core
+DbContext
+DbSet
+Migrations
+CRUD
+relacionamentos
+Include
+LINQ + banco
+SQLite / SQL Server

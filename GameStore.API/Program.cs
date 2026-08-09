@@ -16,8 +16,6 @@ builder.Services.AddCors(options =>
         });
 });
 
-
-
 builder.Services.AddOpenApi();
 
 
@@ -35,7 +33,6 @@ builder.Services.AddDbContext<GameStoreContext>(options =>
 var app = builder.Build();
 
 app.UseCors("Frontend");
-
 
 if (app.Environment.IsDevelopment())
 {
@@ -56,7 +53,6 @@ app.MapPost("/games", (GameStoreContext db, Game game) =>
 {
     db.Games.Add(game);
     db.SaveChanges();
-
     return Results.Created($"/games/{game.Id}", game);
 });
 
@@ -67,11 +63,11 @@ app.MapGet("/games/search", (GameStoreContext db, string query) =>
     Console.WriteLine($"Buscando: {query}");
 
     var games = db.Games
-        .Where(g => g.Title.Contains(query))
+        .Where(g => g.Title.ToLower().Contains(query)) 
         .ToList();
-
     return Results.Ok(games);
 });
+
 
 app.MapGet("/games/{id:int}", (GameStoreContext db, int id) =>
 {

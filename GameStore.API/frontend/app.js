@@ -27,9 +27,10 @@ async function loadGames() {
 
 
 searchGames = async () => {
-    const searchInput = document.getElementById("search").value;
+    const searchInput = document.getElementById("search").value.toLowerCase();
 
     const response = await fetch(`http://localhost:5222/games/search?query=${searchInput}`);
+    
 
     const games = await response.json();
 

@@ -1,0 +1,113 @@
+# Uma classe é como um modelo que define como determinado objeto será.
+
+# O que são essas coisas dentro da classe?
+
+# Veja:
+public class Game
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Genre { get; set; }
+    public double Price { get; set; }
+}
+
+# Essas são propriedades.
+
+# Por exemplo:
+
+public string Title { get; set; }
+
+# significa que o objeto Game possui uma propriedade chamada Title.
+
+# Então podemos fazer:
+
+game.Title = "Minecraft";
+
+# O set permite alterar:
+
+game.Title = "Minecraft";
+
+# O get permite pegar o valor:
+
+Console.WriteLine(game.Title);
+
+
+===============================================
+// ORIENTAÇÃO A OBJETOS
+
+using System;
+
+namespace ConceitosBasicos
+{
+    class Program
+    {
+        class Pessoa
+        {
+            // public string Nome { get; set; } = string.Empty;
+            // public int Idade { get; set; }
+            // public String Endereco { get; set; } = string.Empty;
+
+            public string Nome;
+            public int Idade;
+            public String Endereco;
+
+            public Pessoa(string nome, int idade, string endereco)
+            {
+                Nome = nome;
+                Idade = idade;
+                Endereco = endereco;
+            }
+
+            public void MostrarResultados()
+            {
+                Console.WriteLine($"Nome: {Nome}");
+                Console.WriteLine($"Idade: {Idade}");
+                Console.WriteLine($"Endereço: {Endereco}");
+            }
+        }
+
+        
+
+        static void Main(string[] args)
+        {
+            // Pessoa pessoa = new Pessoa {
+            //     Nome = "Carlos",
+            //     Idade = 28,
+            //     Endereco = "Rua ABC123"
+            // };
+            // pessoa.MostrarResultados();
+
+            Pessoa pessoa = new Pessoa("Carlos", 28, "Rua ABC123");
+            pessoa.MostrarResultados();
+
+        }
+
+    }
+}
+
+
+
+1. Primeiro método — Object Initializer
+
+Crie uma Pessoa e depois atribua esses valores às propriedades.
+
+É como se, de forma simplificada, fosse:
+
+Pessoa pessoa = new Pessoa();
+pessoa.Nome = "Carlos";
+pessoa.Idade = 28;
+pessoa.Endereco = "Rua ABC123";
+
+
+Você pode criar o objeto sem fornecer esses valores.
+
+========================================
+
+
+2. Segundo método — Construtor
+
+Pessoa pessoa = new Pessoa("Carlos", 28, "Rua ABC123");
+
+Para criar uma Pessoa, preciso fornecer nome, idade e endereço.
+
+Você está obrigando quem cria o objeto a fornecer os valores.
