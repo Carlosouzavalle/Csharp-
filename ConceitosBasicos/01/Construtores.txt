@@ -1,0 +1,262 @@
+# Construtores em C#
+
+# Um construtor é um método especial executado automaticamente quando criamos um objeto com new.
+
+# Por exemplo:
+
+class Pessoa
+{
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+
+    public Pessoa()
+    {
+        Console.WriteLine("Pessoa criada!");
+    }
+}
+
+
+# Quando fazemos:
+
+Pessoa pessoa = new Pessoa();
+
+# o construtor:
+
+public Pessoa()
+{
+    Console.WriteLine("Pessoa criada!");
+}
+
+# é executado automaticamente.
+1. Como reconhecer um construtor?
+# Ele tem o mesmo nome da classe e não possui tipo de retorno.
+
+# Classe:
+class Pessoa
+
+# Construtor:
+public Pessoa()
+
+
+# Observe que não temos:
+
+void
+int
+string
+
+# Por exemplo, isso não é construtor:
+
+public void Pessoa()
+
+# Isso seria um método chamado Pessoa.
+
+2. Construtor com parâmetros
+# Podemos obrigar o usuário a fornecer informações quando criar o objeto.
+
+class Pessoa
+{
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+
+    public Pessoa(string nome, int idade)
+    {
+        Nome = nome;
+        Idade = idade;
+    }
+}
+
+# Agora:
+
+Pessoa pessoa = new Pessoa("Carlos", 28);
+
+# O construtor recebe:
+
+nome = "Carlos"
+idade = 28
+
+# e executa:
+
+Nome = nome;
+Idade = idade;
+
+# Então o objeto já nasce com esses valores.
+
+
+3. Por que usar construtor?
+
+# Compare:
+
+# Sem construtor
+Pessoa pessoa = new Pessoa();
+
+pessoa.Nome = "Carlos";
+pessoa.Idade = 28;
+
+# O objeto é criado primeiro e preenchido depois.
+
+# Com construtor
+Pessoa pessoa = new Pessoa("Carlos", 28);
+
+# O objeto já é criado com os dados necessários.
+#Podemos pensar:
+
+#Sem construtor:
+
+new Pessoa()
+     ↓
+ objeto vazio
+     ↓
+ preencher dados
+
+
+# Com construtor:
+
+new Pessoa("Carlos", 28)
+     ↓
+ objeto já configurado
+
+
+4. Construtor + propriedades
+
+# Essa combinação é muito comum:
+
+class Produto
+{
+    public string Nome { get; set; }
+    public double Preco { get; set; }
+
+    public Produto(string nome, double preco)
+    {
+        Nome = nome;
+        Preco = preco;
+    }
+}
+
+# Agora:
+
+Produto produto = new Produto("Camisa", 25.00);
+
+# E:
+
+Console.WriteLine(produto.Nome);
+Console.WriteLine(produto.Preco);
+
+5. this no construtor
+
+# Existe uma situação que você vai encontrar bastante:
+
+class Pessoa
+{
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+
+    public Pessoa(string nome, int idade)
+    {
+        this.Nome = nome;
+        this.Idade = idade;
+    }
+}
+
+# O this significa:
+
+# este objeto atual
+
+# Então:
+
+this.Nome
+
+# significa:
+
+# A propriedade Nome deste objeto.
+
+# Enquanto:
+
+nome
+
+# é o parâmetro recebido pelo construtor.
+
+# Visualmente:
+
+Pessoa("Carlos", 28)
+       ↓       ↓
+     nome    idade
+       ↓       ↓
+this.Nome   this.Idade
+
+# Por isso:
+
+this.Nome = nome;
+# significa:
+# Coloque o valor do parâmetro nome na propriedade Nome deste objeto.
+
+
+6. Você pode ter mais de um construtor
+# Isso se chama sobrecarga de construtor.
+
+# Por exemplo:
+
+class Pessoa
+{
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+
+    public Pessoa()
+    {
+        Nome = "Desconhecido";
+        Idade = 0;
+    }
+
+    public Pessoa(string nome, int idade)
+    {
+        Nome = nome;
+        Idade = idade;
+    }
+}
+
+# Agora podemos fazer:
+
+Pessoa pessoa1 = new Pessoa();
+
+# ou:
+
+Pessoa pessoa2 = new Pessoa("Carlos", 28);
+
+# Os dois são válidos.
+
+
+7. Um detalhe importante
+
+# Se você não criar nenhum construtor, o C# fornece automaticamente um construtor vazio.
+
+# Por exemplo:
+
+class Pessoa
+{
+    public string Nome { get; set; }
+}
+
+# Podemos fazer:
+
+Pessoa pessoa = new Pessoa();
+
+# Mas se você criar um construtor com parâmetros:
+
+public Pessoa(string nome)
+{
+    Nome = nome;
+}
+
+# o construtor vazio deixa de ser fornecido automaticamente.
+
+# Então:
+
+Pessoa pessoa = new Pessoa();
+
+# pode deixar de funcionar.
+
+# Você teria que fazer:
+
+Pessoa pessoa = new Pessoa("Carlos");
+
+# Ou criar os dois construtores manualmente.
+

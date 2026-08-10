@@ -1,7 +1,6 @@
 1. O que é uma propriedade?
 
-# Uma propriedade permite que uma classe exponha e controle dados que 
-# pertencem ao objeto.
+# Uma propriedade permite que uma classe exponha e controle dados que pertencem ao objeto.
 # Exemplo:
 
 class Pessoa
