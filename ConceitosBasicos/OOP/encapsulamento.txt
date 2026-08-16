@@ -1,0 +1,262 @@
+1. O que é encapsulamento?
+
+Encapsulamento é a ideia de proteger os dados internos de um objeto e controlar como eles podem ser acessados ou modificados
+
+Imagine uma conta bancária:
+
+Conta
+├── saldo
+├── depositar()
+└── sacar()
+
+Você não deveria simplesmente poder fazer:
+
+conta.Saldo = -5000;
+
+O objeto deveria controlar as regras.
+Por exemplo:
+
+conta.Sacar(100);
+
+E a própria classe verifica se existe saldo suficiente.
+
+===================================================
+
+2. O problema de deixar tudo public
+
+Imagine:
+
+class Pessoa
+{
+    public string Nome;
+    public int Idade;
+}
+
+Agora qualquer parte do programa pode fazer:
+
+Pessoa pessoa = new Pessoa();
+
+
+pessoa.Idade = -500;
+
+Não faz sentido uma pessoa ter -500 anos.
+
+O problema é que a classe não tem controle sobre seus próprios dados.
+
+===================================================
+
+3. Usando private
+Podemos esconder o dado:
+
+class Pessoa
+{
+    private int idade;
+}
+
+Agora isso:
+
+Pessoa pessoa = new Pessoa();
+
+
+pessoa.idade = 28;
+
+não funciona.
+
+Porque idade é:
+
+private
+
+Ou seja:
+
+Só pode ser acessado dentro da própria classe.
+
+===================================================
+
+4. Mas como acessar então?
+
+Podemos criar uma propriedade:
+
+class Pessoa
+{
+    private int idade;
+
+
+    public int Idade
+    {
+        get
+        {
+            return idade;
+        }
+
+
+        set
+        {
+            if (value >= 0)
+            {
+                idade = value;
+            }
+        }
+    }
+}
+
+Agora:
+
+Pessoa pessoa = new Pessoa();
+pessoa.Idade = 28;
+
+funciona.
+
+Mas:
+
+pessoa.Idade = -10;
+
+não altera o valor.
+
+A classe está controlando o acesso ao dado.
+
+===================================================
+
+5. O fluxo fica assim
+
+Quando fazemos:
+
+pessoa.Idade = -10;
+
+acontece:
+
+pessoa.Idade = -10
+        ↓
+       SET
+        ↓
+value = -10
+        ↓
+value >= 0 ?
+        ↓
+      NÃO
+        ↓
+não altera idade
+
+Isso é encapsulamento na prática.
+
+===================================================
+
+6. private set
+
+Existe outra forma muito comum:
+
+class Pessoa
+{
+    public string Nome { get; private set; }
+
+
+    public Pessoa(string nome)
+    {
+        Nome = nome;
+    }
+}
+
+Agora:
+
+Pessoa pessoa = new Pessoa("Carlos");
+
+
+Console.WriteLine(pessoa.Nome);
+
+funciona.
+
+Mas:
+
+pessoa.Nome = "João";
+
+não funciona.
+
+Porque:
+
+public string Nome { get; private set; }
+
+significa:
+
+public get
+    ↓
+qualquer código pode ler
+
+
+private set
+    ↓
+somente a classe pode alterar
+
+==================================================
+
+7. Encapsulamento com métodos
+
+Esse é um padrão muito importante.
+
+Imagine uma conta:
+
+class Conta
+{
+    private double saldo;
+
+
+    public double Saldo
+    {
+        get
+        {
+            return saldo;
+        }
+    }
+
+
+    public void Depositar(double valor)
+    {
+        if (valor > 0)
+        {
+            saldo += valor;
+        }
+    }
+
+
+    public void Sacar(double valor)
+    {
+        if (valor > 0 && valor <= saldo)
+        {
+            saldo -= valor;
+        }
+    }
+}
+
+Observe que não temos:
+
+public double Saldo { get; set; }
+
+O código externo não pode simplesmente modificar o saldo.
+
+Ele precisa usar:
+
+conta.Depositar(500);
+conta.Sacar(100);
+
+
+A classe controla as regras.
+
+===================================================
+
+8. public e private
+
+Por enquanto, guarde esta ideia:
+
+public
+
+Pode ser acessado de fora da classe:
+
+public string Nome;
+private
+
+Só pode ser acessado dentro da classe:
+
+private string nome;
+public get; private set;
+
+Pode ser lido de fora, mas alterado somente dentro da classe:
+
+public string Nome { get; private set; }
