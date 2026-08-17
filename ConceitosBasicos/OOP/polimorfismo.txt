@@ -1,0 +1,230 @@
+Polimorfismo 
+A palavra significa: "Muitas formas."
+
+Em C#, polimorfismo permite que você trabalhe com objetos diferentes através de um tipo comum, mas cada objeto execute seu próprio comportamento.
+
+1. Temos uma classe base
+abstract class Funcionario
+{
+    public string Nome { get; set; } = string.Empty;
+
+
+    public abstract void Trabalhar();
+}
+
+E duas classes:
+
+class Desenvolvedor : Funcionario
+{
+    public override void Trabalhar()
+    {
+        Console.WriteLine("Desenvolvendo software...");
+    }
+}
+
+class Designer : Funcionario
+{
+    public override void Trabalhar()
+    {
+        Console.WriteLine("Criando interfaces...");
+    }
+}
+
+Até aqui você já conhece.
+Agora vem o polimorfismo.
+
+=================================================================
+
+2. Podemos usar Funcionario como tipo
+
+Em vez de:
+
+Desenvolvedor dev = new Desenvolvedor();
+Designer designer = new Designer();
+
+podemos fazer:
+
+Funcionario dev = new Desenvolvedor();
+Funcionario designer = new Designer();
+
+Funcionario dev = new Desenvolvedor();
+     ↑                    ↑
+   tipo              objeto real
+
+A variável é do tipo Funcionario, mas o objeto que ela representa é um Desenvolvedor.
+
+E:
+
+Funcionario designer = new Designer();
+     ↑                    ↑
+   tipo              objeto real
+
+
+=================================================================
+
+3. E o comportamento é diferente
+
+Podemos fazer:
+
+Funcionario dev = new Desenvolvedor();
+Funcionario designer = new Designer();
+
+
+dev.Trabalhar();
+designer.Trabalhar();
+
+Resultado:
+
+Desenvolvendo software...
+Criando interfaces...
+
+Mesmo que as duas variáveis sejam:
+
+Funcionario
+
+cada objeto executou seu próprio Trabalhar().
+Isso é polimorfismo.
+
+===============================================================
+
+4. A parte mais interessante
+
+Podemos colocar os dois em uma coleção:
+
+Funcionario[] funcionarios =
+{
+    new Desenvolvedor(),
+    new Designer()
+};
+
+E:
+
+foreach (Funcionario funcionario in funcionarios)
+{
+    funcionario.Trabalhar();
+}
+
+Resultado:
+
+Desenvolvendo software...
+Criando interfaces...
+
+Olha a vantagem.
+
+O foreach não precisa saber se é:
+
+Desenvolvedor
+Designer
+Gerente
+Analista
+Estagiario
+
+Ele simplesmente sabe:
+
+"Isso é um Funcionario e todo funcionário possui Trabalhar()."
+
+Cada objeto decide qual implementação executar.
+
+===============================================================
+
+5. Visualmente
+
+Imagine:
+
+                 Funcionario
+                     │
+            Trabalhar()
+                     │
+          ┌──────────┴──────────┐
+          ↓                     ↓
+    Desenvolvedor            Designer
+          │                     │
+          ↓                     ↓
+"Desenvolvendo..."      "Criando interfaces..."
+
+Quando fazemos:
+
+funcionario.Trabalhar();
+
+o C# identifica qual objeto está por trás daquela referência e executa a implementação correspondente.
+
+
+6. Isso é diferente de simplesmente ter métodos diferentes
+
+Não é apenas:
+
+dev.Trabalhar();
+designer.Trabalhar();
+
+O ponto importante é que podemos tratar ambos como:
+
+Funcionario
+
+Por exemplo:
+
+static void ExecutarTrabalho(Funcionario funcionario)
+{
+    funcionario.Trabalhar();
+}
+
+Agora:
+
+ExecutarTrabalho(new Desenvolvedor());
+ExecutarTrabalho(new Designer());
+
+Resultado:
+
+Desenvolvendo software...
+Criando interfaces...
+
+O método:
+
+ExecutarTrabalho(Funcionario funcionario)
+
+não precisa saber qual é o tipo específico.
+
+Ele só precisa saber que recebeu um Funcionario.
+
+=================================================================
+
+7. Onde entra o override?
+
+Você já usou:
+
+public override void Trabalhar()
+
+O override diz:
+
+"Estou fornecendo uma implementação específica para um comportamento definido pela classe base."
+
+A classe base:
+
+public abstract void Trabalhar();
+
+diz:
+
+Todo funcionário precisa ter Trabalhar().
+
+
+O Desenvolvedor:
+
+public override void Trabalhar()
+{
+    Console.WriteLine("Desenvolvendo software...");
+}
+
+diz:
+
+Para mim, trabalhar significa desenvolver software.
+
+O Designer:
+
+public override void Trabalhar()
+{
+    Console.WriteLine("Criando interfaces...");
+}
+
+diz:
+
+Para mim, trabalhar significa criar interfaces.
+

@@ -1,0 +1,255 @@
+1. O que é abstração?
+
+Abstração é esconder detalhes desnecessários e mostrar apenas aquilo que é importante para utilizar um objeto.
+
+Pense em um carro.
+Quando você faz:
+
+Carro
+ ↓
+acelerar()
+frear()
+
+você não precisa saber como o motor, injeção, câmbio e centenas de componentes internos funcionam para usar o carro.
+
+Você simplesmente usa:
+
+acelerar()
+frear()
+
+A implementação fica escondida.
+
+Em programação, a abstração permite criar uma estrutura que representa o que algo deve fazer, sem necessariamente definir todos os detalhes de como fará.
+
+========================================================
+
+2. abstract
+
+Em C#, podemos criar uma classe abstrata:
+
+abstract class Animal
+{
+}
+
+Uma classe abstract não pode ser instanciada diretamente.
+
+Isso não pode:
+
+Animal animal = new Animal();
+
+Porque Animal é uma ideia mais genérica.
+
+Podemos ter:
+
+Animal
+ ├── Cachorro
+ ├── Gato
+ └── Passaro
+
+Então criamos as classes específicas.
+
+========================================================
+
+3. Método abstrato
+
+A parte mais importante:
+
+abstract class Animal
+{
+    public abstract void EmitirSom();
+}
+
+Aqui estamos dizendo:
+
+Todo Animal deve possuir um método EmitirSom().
+
+Mas não estamos dizendo como o som será produzido.
+
+Por isso não colocamos implementação:
+
+public abstract void EmitirSom();
+
+Não existe:
+
+{
+    // código
+}
+
+========================================================
+
+4. Classes derivadas implementam o comportamento
+
+Agora:
+
+class Cachorro : Animal
+{
+    public override void EmitirSom()
+    {
+        Console.WriteLine("Au au!");
+    }
+}
+
+E:
+
+class Gato : Animal
+{
+    public override void EmitirSom()
+    {
+        Console.WriteLine("Miau!");
+    }
+}
+
+
+Observe:
+
+class Cachorro : Animal
+
+O : significa que Cachorro está herdando de Animal.
+
+E:
+
+override
+
+significa que estamos implementando/sobrescrevendo aquele comportamento definido pela classe base.
+
+========================================================
+
+5. Usando os objetos
+
+Agora podemos fazer:
+
+Cachorro cachorro = new Cachorro();
+Gato gato = new Gato();
+
+
+cachorro.EmitirSom();
+gato.EmitirSom();
+
+Resultado:
+
+Au au!
+Miau!
+
+A abstração está aqui:
+
+abstract class Animal
+{
+    public abstract void EmitirSom();
+}
+
+Animal define o que deve existir.
+
+Cada animal define como aquilo funciona.
+
+========================================================
+
+6. Por que não colocar simplesmente um método normal?
+
+Poderíamos fazer:
+
+class Animal
+{
+    public void EmitirSom()
+    {
+        Console.WriteLine("Som");
+    }
+}
+
+Mas isso não representa muito bem nossa situação.
+
+Um cachorro não deveria simplesmente usar o mesmo comportamento genérico de um gato.
+
+Com:
+
+public abstract void EmitirSom();
+
+obrigamos cada classe concreta a definir seu próprio comportamento.
+
+Se fizermos:
+
+class Cachorro : Animal
+{
+}
+
+vai dar erro, porque Cachorro não implementou:
+
+EmitirSom()
+
+========================================================
+
+
+7. Abstração não significa apenas abstract
+
+Esse é um detalhe importante.
+
+Você pode fazer abstração sem necessariamente usar:
+
+abstract
+
+Por exemplo, quando você criou:
+
+ContaBancaria
+
+e colocou:
+
+public void Depositar(double valor)
+
+quem utiliza a classe não precisa saber como o saldo é armazenado internamente.
+
+Ele simplesmente faz:
+
+conta.Depositar(100);
+
+O funcionamento interno está escondido.
+
+Então podemos pensar:
+
+Abstração:
+
+O que eu preciso saber para usar isso?
+
+Encapsulamento:
+
+Como eu protejo os dados e detalhes internos disso?
+
+========================================================
+
+8. Uma diferença simples
+
+Imagine seu GameStore.
+
+Você pode ter:
+
+abstract class Jogo
+{
+    public string Nome { get; set; }
+
+
+    public abstract void Iniciar();
+}
+
+Depois:
+
+class JogoSinglePlayer : Jogo
+{
+    public override void Iniciar()
+    {
+        Console.WriteLine("Iniciando campanha...");
+    }
+}
+
+E:
+
+class JogoOnline : Jogo
+{
+    public override void Iniciar()
+    {
+        Console.WriteLine("Conectando ao servidor...");
+    }
+}
+
+Quem utiliza os objetos só precisa saber:
+
+jogo.Iniciar();
+
+Não precisa conhecer todos os detalhes de implementação.
