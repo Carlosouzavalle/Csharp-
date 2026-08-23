@@ -379,3 +379,147 @@ Nome: Rex
 Raça: Pastor Alemão
 
 
+===============================================================================
+
+10. Herança + virtual + override
+
+Agora vamos conectar isso ao polimorfismo que você acabou de estudar.
+
+A classe base pode fornecer um comportamento padrão:
+
+class Animal
+{
+    public virtual void EmitirSom()
+    {
+        Console.WriteLine("Animal emitindo som...");
+    }
+}
+
+
+O virtual significa:
+
+Esse método pode ser sobrescrito pelas classes derivadas.
+
+Então:
+
+class Cachorro : Animal
+{
+    public override void EmitirSom()
+    {
+        Console.WriteLine("Au au!");
+    }
+}
+
+E:
+
+class Gato : Animal
+{
+    public override void EmitirSom()
+    {
+        Console.WriteLine("Miau!");
+    }
+}
+
+
+Agora:
+
+Animal cachorro = new Cachorro();
+Animal gato = new Gato();
+
+cachorro.EmitirSom();
+gato.EmitirSom();
+
+Resultado:
+
+Au au!
+Miau!
+
+============================================================================
+
+11. abstract x virtual
+
+Essa diferença é MUITO importante.
+
+abstract
+
+A classe base não fornece implementação.
+
+abstract class Animal
+{
+    public abstract void EmitirSom();
+}
+
+A classe filha é obrigada a implementar:
+
+public override void EmitirSom()
+{
+}
+
+
+virtual
+
+A classe base fornece uma implementação, mas permite que a filha altere.
+
+class Animal
+{
+    public virtual void EmitirSom()
+    {
+        Console.WriteLine("Som genérico");
+    }
+}
+
+A filha pode simplesmente herdar:
+
+class Peixe : Animal
+{
+}
+
+ou sobrescrever:
+
+class Cachorro : Animal
+{
+    public override void EmitirSom()
+    {
+        Console.WriteLine("Au au!");
+    }
+}
+Resumindo:
+abstract
+   ↓
+"Você PRECISA implementar."
+
+virtual
+   ↓
+"Você PODE sobrescrever."
+
+
+12. E override?
+
+override aparece quando a classe filha substitui um comportamento herdado:
+
+public override void EmitirSom()
+
+Normalmente temos:
+
+Classe base
+     ↓
+virtual / abstract
+     ↓
+Classe derivada
+     ↓
+override
+
+
+14. C# não permite herança múltipla de classes
+
+Isso não é permitido:
+
+class Cachorro : Animal, Mamifero // ❌
+
+Uma classe só pode herdar diretamente de uma classe.
+
+Porém, posteriormente veremos que uma classe pode implementar várias interfaces:
+
+class Cachorro : Animal, ICorredor, INadador
+
+É justamente uma das razões pelas quais interfaces são tão importantes em C#.

@@ -1,0 +1,404 @@
+Interfaces em C#
+
+Uma interface define um contrato.
+
+Ela diz:
+
+"Qualquer classe que implementar esta interface precisa fornecer estes comportamentos."
+
+Por exemplo:
+
+interface IAnimal
+{
+    void EmitirSom();
+}
+
+A interface não está dizendo como o animal fará isso.
+
+Ela apenas estabelece:
+
+IAnimal
+  ↓
+"Você precisa ter EmitirSom()"
+
+1. Implementando uma interface
+
+Criamos uma classe:
+
+class Cachorro : IAnimal
+{
+    public void EmitirSom()
+    {
+        Console.WriteLine("Au au!");
+    }
+}
+
+Observe que agora usamos:
+
+class Cachorro : IAnimal
+
+Isso significa:
+
+Cachorro implementa IAnimal.
+
+2. Uma diferença importante
+
+Na herança:
+
+class Cachorro : Animal
+
+estamos dizendo:
+
+Cachorro é um Animal.
+
+Na interface:
+
+class Cachorro : IAnimal
+
+estamos dizendo:
+
+Cachorro possui o comportamento definido por IAnimal.
+
+Uma forma simples de pensar:
+
+Herança
+"É um"
+
+Interface
+"Pode fazer"
+
+Por exemplo:
+
+Cachorro
+ ├── Animal
+ ├── ICorredor
+ └── INadador
+
+Um cachorro é um animal.
+
+E ele pode ser capaz de correr e nadar.
+
+3. Interface não é instanciada
+
+Você não pode fazer:
+
+IAnimal animal = new IAnimal(); // ❌
+
+Porque a interface não é uma classe concreta.
+
+Mas pode fazer:
+
+IAnimal animal = new Cachorro();
+
+Isso é permitido.
+
+E então:
+
+animal.EmitirSom();
+
+Resultado:
+
+Au au!
+
+Aqui temos novamente polimorfismo.
+
+4. A classe é obrigada a implementar
+
+Se temos:
+
+interface IAnimal
+{
+    void EmitirSom();
+}
+
+E fazemos:
+
+class Cachorro : IAnimal
+{
+}
+
+teremos erro.
+
+Por quê?
+
+Porque Cachorro prometeu implementar IAnimal, mas não implementou:
+
+EmitirSom()
+
+Precisamos:
+
+class Cachorro : IAnimal
+{
+    public void EmitirSom()
+    {
+        Console.WriteLine("Au au!");
+    }
+}
+
+5. Interface normalmente começa com I
+
+Por convenção, interfaces em C# começam com I maiúsculo:
+
+IAnimal
+IUsuario
+IProduto
+IPagamento
+IRepositorio
+ILogger
+
+Isso não é uma obrigação da linguagem, mas é o padrão utilizado no ecossistema C#.
+
+6. Interface pode ter vários comportamentos
+
+Por exemplo:
+
+interface IVeiculo
+{
+    void Acelerar();
+    void Frear();
+}
+
+Agora:
+
+class Carro : IVeiculo
+{
+    public void Acelerar()
+    {
+        Console.WriteLine("Carro acelerando...");
+    }
+
+    public void Frear()
+    {
+        Console.WriteLine("Carro freando...");
+    }
+}
+
+A classe precisa implementar os dois métodos.
+
+7. Uma classe pode implementar várias interfaces
+
+Aqui está uma diferença MUITO importante em relação à herança.
+
+Uma classe não pode herdar de várias classes:
+
+class Cachorro : Animal, Mamifero // ❌
+
+Mas pode implementar várias interfaces:
+
+class Cachorro : IAnimal, ICorredor, INadador
+{
+}
+
+Por exemplo:
+
+interface ICorredor
+{
+    void Correr();
+}
+interface INadador
+{
+    void Nadar();
+}
+
+Então:
+
+class Cachorro : IAnimal, ICorredor, INadador
+{
+    public void EmitirSom()
+    {
+        Console.WriteLine("Au au!");
+    }
+
+    public void Correr()
+    {
+        Console.WriteLine("Correndo...");
+    }
+
+    public void Nadar()
+    {
+        Console.WriteLine("Nadando...");
+    }
+}
+
+Agora o cachorro possui três contratos:
+
+IAnimal
+   ↓
+EmitirSom()
+
+ICorredor
+   ↓
+Correr()
+
+INadador
+   ↓
+Nadar()
+
+8. Interface + polimorfismo
+
+Aqui começa a ficar realmente interessante.
+
+Podemos fazer:
+
+ICorredor corredor = new Cachorro();
+
+corredor.Correr();
+
+A variável só precisa saber:
+
+"Esse objeto sabe correr."
+
+Ela não precisa saber que é um Cachorro.
+
+Podemos ter:
+
+class Humano : ICorredor
+{
+    public void Correr()
+    {
+        Console.WriteLine("Humano correndo...");
+    }
+}
+
+Agora:
+
+ICorredor[] corredores =
+{
+    new Cachorro(),
+    new Humano()
+};
+
+E:
+
+foreach (ICorredor corredor in corredores)
+{
+    corredor.Correr();
+}
+
+Resultado:
+
+Correndo...
+Humano correndo...
+
+Isso é polimorfismo através de uma interface.
+
+9. Interface x classe abstrata
+
+Essa é uma comparação que você precisa guardar.
+
+Classe abstrata
+abstract class Animal
+{
+    public string Nome { get; set; }
+
+    public abstract void EmitirSom();
+
+    public void Dormir()
+    {
+        Console.WriteLine("Dormindo...");
+    }
+}
+
+Uma classe abstrata pode ter:
+
+propriedades;
+campos;
+métodos implementados;
+métodos abstratos;
+construtores;
+lógica interna.
+
+Ela é uma classe base.
+
+10. Uma forma fácil de diferenciar
+
+Imagine um sistema de jogos.
+
+Temos:
+
+Personagem
+
+Um Guerreiro, Mago e Arqueiro são personagens.
+
+Então faz sentido:
+
+class Guerreiro : Personagem
+
+Isso é herança.
+
+Agora imagine:
+
+Pode atacar
+Pode voar
+Pode nadar
+Pode salvar o jogo
+
+Esses são comportamentos que diferentes objetos podem ter.
+
+Podemos criar:
+
+IAtaque
+IVoador
+INadador
+ISalvavel
+
+Então:
+
+class Guerreiro : Personagem, IAtaque
+class Dragao : Personagem, IAtaque, IVoador
+class Peixe : Animal, INadador
+
+Isso permite montar comportamentos de maneira mais flexível.
+
+
+12. Exemplo mais próximo de aplicações reais
+
+Imagine uma aplicação que processa pagamentos.
+
+Temos:
+
+interface IPagamento
+{
+    void Pagar(double valor);
+}
+
+Agora:
+
+class Pix : IPagamento
+{
+    public void Pagar(double valor)
+    {
+        Console.WriteLine($"Pagamento de R$ {valor} via PIX.");
+    }
+}
+
+E:
+
+class Cartao : IPagamento
+{
+    public void Pagar(double valor)
+    {
+        Console.WriteLine($"Pagamento de R$ {valor} via cartão.");
+    }
+}
+
+Podemos fazer:
+
+IPagamento pagamento = new Pix();
+
+pagamento.Pagar(100);
+
+Ou:
+
+IPagamento pagamento = new Cartao();
+
+pagamento.Pagar(100);
+
+O código que utiliza IPagamento não precisa saber exatamente qual sistema de pagamento está sendo usado.
+
+Ele só sabe:
+
+"Eu tenho alguma coisa capaz de realizar um pagamento."
+
+Isso é uma das grandes utilidades das interfaces em aplicações reais.
+
