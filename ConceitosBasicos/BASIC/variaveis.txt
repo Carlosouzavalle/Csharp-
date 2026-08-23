@@ -11,7 +11,7 @@
 // O var ele consegue ser dinamico a ponto de você não precisar especificar o tipo da variavel
 // lembrando que em c# você precisa definir o tipo de dado antes de declarar a variavel a não ser no caso a acima
 
-//======================================================================================
+======================================================================================
 // Concatenação
 
 // string nome = "Carlos";

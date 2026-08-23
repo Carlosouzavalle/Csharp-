@@ -1,35 +1,35 @@
-﻿using System;
+﻿// using System;
 
-class Pessoa
-{
-    public string nome;
-    public int idade;
+// class Pessoa
+// {
+//     public string nome;
+//     public int idade;
 
-    public void Apresentar()
-    {
-        Console.WriteLine($"Nome: {nome} Idade: {idade}");
-    }
-}
-
-
-class Aluno : Pessoa
-{
-    public string Curso;
-}
+//     public void Apresentar()
+//     {
+//         Console.WriteLine($"Nome: {nome} Idade: {idade}");
+//     }
+// }
 
 
-class Program
-{
-    static void Main()
-    {
-        {
-            Aluno a = new Aluno();
+// class Aluno : Pessoa
+// {
+//     public string Curso;
+// }
 
-            a.nome = "Carlos";
-            a.idade = 27;
-            a.Curso = "Software Engeenier";
 
-            a.Apresentar();
-        }
-    }
-}
+// class Program
+// {
+//     static void Main()
+//     {
+//         {
+//             Aluno a = new Aluno();
+
+//             a.nome = "Carlos";
+//             a.idade = 27;
+//             a.Curso = "Software Engeenier";
+
+//             a.Apresentar();
+//         }
+//     }
+// }

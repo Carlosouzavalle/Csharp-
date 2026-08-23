@@ -1,37 +1,381 @@
-// Herança
+Herança em C#
 
-using System;
+Herança permite que uma classe aproveite propriedades e métodos de outra classe.
 
-class Pessoa
+A classe que fornece os recursos é chamada de classe base.
+
+A classe que herda é chamada de classe derivada.
+
+              Animal
+             /      \
+            /        \
+      Cachorro       Gato
+
+Cachorro e Gato herdam de Animal.
+
+
+1. Exemplo básico
+
+Vamos criar:
+
+class Animal
 {
-    public string nome;
-    public int idade;
+    public string Nome { get; set; }
 
-    public void Apresentar()
+    public void Dormir()
     {
-        Console.WriteLine($"Nome: {nome} Idade: {idade}");
+        Console.WriteLine($"{Nome} está dormindo.");
     }
 }
 
+Agora:
 
-class Aluno : Pessoa
+class Cachorro : Animal
 {
-    public string Curso;
 }
 
+Observe:
 
-class Program
+class Cachorro : Animal
+
+Observe:
+
+class Cachorro : Animal
+
+O : significa:
+
+Cachorro herda de Animal.
+
+
+==========================================
+
+
+2. O que a classe filha recebe?
+
+Imagine
+
+class Animal
 {
-    static void Main()
+    public string Nome { get; set; }
+
+    public void Comer()
     {
-        {
-            Aluno a = new Aluno();
-
-            a.nome = "Carlos";
-            a.idade = 27;
-            a.Curso = "Software Engeenier";
-
-            a.Apresentar();
-        }
+        Console.WriteLine($"{Nome} está comendo.");
     }
 }
+
+E:
+
+class Cachorro : Animal
+{
+    public void Latir()
+    {
+        Console.WriteLine("Au au!");
+    }
+}
+
+Agora um Cachorro possui:
+
+Cachorro
+│
+├── Nome        ← herdado
+├── Comer()     ← herdado
+└── Latir()     ← próprio
+
+Então:
+
+Cachorro cachorro = new Cachorro();
+
+cachorro.Nome = "Rex";
+cachorro.Comer();
+cachorro.Latir();
+
+Resultado:
+
+Rex está comendo.
+Au au!
+
+Essa é uma das principais vantagens da herança:
+
+Evitar repetir código que é comum entre várias classes.
+
+=====================================================================
+
+
+4. Herança não significa copiar
+
+Esse detalhe é importante.
+
+Quando fazemos:
+
+class Cachorro : Animal
+
+não significa simplesmente:
+
+"Copie o código de Animal para dentro de Cachorro."
+
+Existe uma relação de especialização:
+
+Animal
+  ↓
+Cachorro
+
+Todo cachorro é um animal.
+
+Mas nem todo animal é um cachorro.
+
+Isso é chamado de relação "é um".
+
+Cachorro é um Animal       ✅
+Gato é um Animal           ✅
+Carro é um Animal          ❌
+
+Esse é um bom teste para saber se herança faz sentido.
+
+
+======================================================================
+
+5. Classe filha pode adicionar coisas
+
+A classe derivada não fica limitada ao que recebeu.
+
+class Animal
+{
+    public string Nome { get; set; }
+
+    public void Comer()
+    {
+        Console.WriteLine("Comendo...");
+    }
+}
+class Cachorro : Animal
+{
+    public void Latir()
+    {
+        Console.WriteLine("Au au!");
+    }
+}
+
+O cachorro agora tem:
+
+Animal
+ ├── Nome
+ └── Comer()
+
+Cachorro
+ └── Latir()
+
+==============================================================
+
+6. protected
+
+Agora chegamos a uma palavra importante:
+
+protected
+
+Você já conhece:
+
+private
+
+e:
+
+public
+
+O protected fica no meio.
+
+private
+
+Somente a própria classe:
+
+private double salario;
+public
+
+Qualquer código que tenha acesso ao objeto:
+
+public string Nome;
+protected
+
+A própria classe e suas classes derivadas:
+
+protected double salario;
+
+Exemplo:
+
+class Funcionario
+{
+    protected double salario;
+
+    public void MostrarSalario()
+    {
+        Console.WriteLine(salario);
+    }
+}
+
+Agora:
+
+class Desenvolvedor : Funcionario
+{
+    public void AumentarSalario()
+    {
+        salario += 1000;
+    }
+}
+
+Isso funciona porque Desenvolvedor herdou de Funcionario.
+
+Mas:
+
+Desenvolvedor dev = new Desenvolvedor();
+
+dev.salario = 5000;
+
+não funciona.
+
+O código externo não pode acessar diretamente o protected.
+
+==============================================================================
+
+7. private x protected
+
+Veja:
+
+class Funcionario
+{
+    private double salario;
+}
+
+A classe filha não consegue acessar diretamente:
+
+class Desenvolvedor : Funcionario
+{
+    void Teste()
+    {
+        salario = 5000; // ❌
+    }
+}
+
+Mas com:
+
+class Funcionario
+{
+    protected double salario;
+}
+
+funciona:
+
+class Desenvolvedor : Funcionario
+{
+    void Teste()
+    {
+        salario = 5000; // ✅
+    }
+}
+
+Por isso protected é bastante utilizado em herança.
+
+============================================================================
+
+8. base
+
+Agora vamos para outro recurso importante.
+
+Suponha:
+
+class Animal
+{
+    public string Nome { get; set; }
+
+    public void Comer()
+    {
+        Console.WriteLine("Animal comendo...");
+    }
+}
+
+E:
+
+class Cachorro : Animal
+{
+    public void Teste()
+    {
+        base.Comer();
+    }
+}
+
+O:
+
+base
+
+representa a classe base.
+
+Então:
+
+base.Comer();
+
+significa:
+
+Execute o Comer() que pertence à classe base.
+
+
+==============================================================================
+
+9. base com construtores
+
+Isso é MUITO importante.
+
+Imagine:
+
+class Animal
+{
+    public string Nome { get; set; }
+
+    public Animal(string nome)
+    {
+        Nome = nome;
+    }
+}
+
+Agora queremos:
+
+class Cachorro : Animal
+{
+    public string Raca { get; set; }
+
+    public Cachorro(string nome, string raca)
+        : base(nome)
+    {
+        Raca = raca;
+    }
+}
+
+Observe:
+
+: base(nome)
+
+Isso chama o construtor da classe Animal.
+
+Quando fazemos:
+
+Cachorro cachorro = new Cachorro("Rex", "Pastor Alemão");
+
+o processo é aproximadamente:
+
+new Cachorro(...)
+       ↓
+construtor Cachorro
+       ↓
+base(nome)
+       ↓
+construtor Animal
+       ↓
+Nome = "Rex"
+       ↓
+volta para Cachorro
+       ↓
+Raca = "Pastor Alemão"
+
+Então o objeto termina com:
+
+Nome: Rex
+Raça: Pastor Alemão
+
+
