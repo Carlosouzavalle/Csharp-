@@ -1,0 +1,289 @@
+Sobrecarga de métodos
+
+Sobrecarga acontece quando temos vários métodos com o mesmo nome, mas com parâmetros diferentes.
+
+
+    class Calculadora
+    {
+        public int Somar(int a, int b)
+        {
+            return a + b;
+        }
+
+        public double Somar(double a, double b)
+        {
+            return a + b;
+        }
+    }
+
+
+Temos dois métodos chamados:
+Somar()
+Somar()
+
+Mas os parâmetros são diferentes:
+
+Somar(int, int)
+Somar(double, double)
+
+Isso é sobrecarga.
+
+
+1. Como o C# sabe qual usar?
+Quando fazemos:
+
+Calculadora calculadora = new Calculadora();
+Console.WriteLine(calculadora.Somar(10, 20));
+
+O C# percebe:
+10  → int
+20  → int
+
+Então chama:
+Somar(int, int)
+
+Se fizermos:
+Console.WriteLine(calculadora.Somar(10.5, 20.5));
+
+ele chama:
+Somar(double, double)
+
+Resultado:
+30
+31
+
+
+2. Podemos ter quantidades diferentes de parâmetros
+
+Não precisa ser apenas o tipo que muda.
+Podemos fazer:
+
+class Calculadora
+{
+    public int Somar(int a, int b)
+    {
+        return a + b;
+    }
+
+    public int Somar(int a, int b, int c)
+    {
+        return a + b + c;
+    }
+}
+
+Agora temos:
+Somar(int, int)
+Somar(int, int, int)
+
+Podemos chamar:
+Console.WriteLine(calculadora.Somar(10, 20));
+
+ou:
+
+Console.WriteLine(calculadora.Somar(10, 20, 30));
+Resultado:
+30
+60
+
+
+3. Podemos mudar a ordem dos tipos
+Também podemos fazer:
+
+public void Mostrar(string nome, int idade)
+{
+    Console.WriteLine($"Nome: {nome}, Idade: {idade}");
+}
+
+public void Mostrar(int idade, string nome)
+{
+    Console.WriteLine($"Idade: {idade}, Nome: {nome}");
+}
+
+
+Esses métodos são diferentes porque a assinatura dos parâmetros é diferente:
+Mostrar(string, int)
+Mostrar(int, string)
+
+
+4. O que NÃO é sobrecarga?
+Uma coisa muito importante:
+Apenas mudar o tipo de retorno não é suficiente.
+Isso não funciona:
+
+public int Somar(int a, int b)
+{
+    return a + b;
+}
+
+public double Somar(int a, int b)
+{
+    return a + b;
+}
+
+O C# não aceita.
+Por quê?
+Porque os parâmetros são exatamente iguais:
+
+Somar(int, int)
+Somar(int, int)
+
+O retorno:
+int
+double
+não faz parte da assinatura usada para diferenciar a sobrecarga.
+
+
+
+5. Sobrecarga de construtores
+Isso é muito importante porque você já estudou construtores.
+Também podemos sobrecarregar construtores:
+
+
+class Pessoa
+{
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+
+    public Pessoa()
+    {
+        Nome = "Desconhecido";
+        Idade = 0;
+    }
+
+    public Pessoa(string nome)
+    {
+        Nome = nome;
+        Idade = 0;
+    }
+
+    public Pessoa(string nome, int idade)
+    {
+        Nome = nome;
+        Idade = idade;
+    }
+}
+
+
+Agora podemos criar:
+
+Pessoa pessoa1 = new Pessoa();
+Pessoa pessoa2 = new Pessoa("Carlos");
+Pessoa pessoa3 = new Pessoa("Carlos", 28);
+
+O C# escolhe o construtor de acordo com os argumentos.
+
+new Pessoa()
+       ↓
+Pessoa()
+
+new Pessoa("Carlos")
+       ↓
+Pessoa(string)
+
+new Pessoa("Carlos", 28)
+       ↓
+Pessoa(string, int)
+
+
+6. Um exemplo mais próximo do que você já fez
+Vamos fazer uma classe Produto.
+
+
+class Produto
+{
+    public string Nome { get; set; } = string.Empty;
+    public double Preco { get; set; }
+
+    public void Mostrar()
+    {
+        Console.WriteLine($"Produto: {Nome}");
+    }
+
+    public void Mostrar(string mensagem)
+    {
+        Console.WriteLine($"{mensagem}: {Nome}");
+    }
+
+    public void Mostrar(string mensagem, bool mostrarPreco)
+    {
+        Console.WriteLine($"{mensagem}: {Nome}");
+
+        if (mostrarPreco)
+        {
+            Console.WriteLine($"Preço: R$ {Preco:F2}");
+        }
+    }
+}
+
+
+Agora:
+Produto produto = new Produto();
+
+produto.Nome = "Camisa";
+produto.Preco = 49.90;
+
+produto.Mostrar();
+
+Resultado:
+Produto: Camisa
+
+Podemos fazer:
+produto.Mostrar("Produto encontrado");
+
+Resultado:
+Produto encontrado: Camisa
+
+Ou:
+
+produto.Mostrar("Produto encontrado", true);
+
+Resultado:
+Produto encontrado: Camisa
+Preço: R$ 49,90
+
+O nome continua sendo:
+Mostrar()
+
+7. Sobrecarga ≠ sobrescrita
+
+Essa diferença é muito importante, principalmente porque você acabou de estudar override.
+
+Sobrecarga — overloading
+
+Mesmo método, parâmetros diferentes:
+void Somar(int a, int b)
+void Somar(int a, int b, int c)
+
+Acontece normalmente dentro da mesma classe.
+
+Sobrescrita — overriding
+
+Uma classe filha altera um método herdado:
+
+class Animal
+{
+    public virtual void EmitirSom()
+    {
+        Console.WriteLine("Som");
+    }
+}
+class Cachorro : Animal
+{
+    public override void EmitirSom()
+    {
+        Console.WriteLine("Au au!");
+    }
+}
+
+Aqui temos:
+
+Animal
+ ↓
+EmitirSom()
+
+Cachorro
+ ↓
+override EmitirSom()
+
+Isso é sobrescrita, não sobrecarga.
+
