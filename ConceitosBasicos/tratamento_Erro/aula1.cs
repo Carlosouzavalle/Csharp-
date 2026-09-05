@@ -1,31 +1,57 @@
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ConceitosBasicos
 {
     class TratamentoDeErro
     {
-        public void Exemplo()
+
+
+        public void fazdivisao()
         {
             Console.WriteLine("Divisão de dois numeros");
             Console.WriteLine("");
             Console.WriteLine("Digite o primeiro numero");
-
             var strnum1 = Console.ReadLine();
 
             Console.WriteLine("Digite o segundo numero");
             var strnum2 = Console.ReadLine();
 
+            int num1 = int.Parse(strnum1);
+            int num2 = int.Parse(strnum2);
+            var divisao = num1 / num2;
+            Console.WriteLine($"O valor de {strnum1} / {strnum2} = {divisao}");
+        } 
+
+
+
+        public void Exemplo()
+        {
+
+            // var strnum1 = Console.ReadLine();
+
+            // Console.WriteLine("Digite o segundo numero");
+            // var strnum2 = Console.ReadLine();
+
+
             try
             {
-                int num1 = int.Parse(strnum1);
-                int num2 = int.Parse(strnum2);
-                var divisao = num1 / num2;
-                Console.WriteLine($"O valor de {strnum1} divido por {strnum2} é {divisao}");
+                fazdivisao();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 Console.WriteLine("Puts ouve um erro de procesamento!");
+
+                if(true)
+                {
+                    Console.WriteLine("Os valores digitados foram invalidos! Por favor Digite novos valores.");
+                    fazdivisao();
+                }
+
+            } finally
+            {
+                Console.WriteLine("Fim da aplicação");
             }
         }
 
