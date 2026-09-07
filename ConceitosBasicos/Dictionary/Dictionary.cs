@@ -8,8 +8,6 @@ namespace ConceitosBasicos
     class Program
     {
 
-        //var sexo = new Dictionary<string, string>();
-
         static void Main(string[] args)
         {
             var sexo = new Dictionary<string, string>();
